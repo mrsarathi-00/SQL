@@ -1,0 +1,338 @@
+📘 What is SQL?
+SQL (Structured Query Language) is a standard language used to store, retrieve, manage, and manipulate data in relational databases like MySQL, PostgreSQL, Oracle, and SQL Server.
+SQL is case-insensitive (but conventions often write keywords in UPPERCASE and table/column names in lowercase).
+
+🗂️ Types of SQL Commands
+Command Type	Purpose	Examples
+DDL (Data Definition Language)	Defines database structure	CREATE, ALTER, DROP
+DML (Data Manipulation Language)	Manages data inside tables	SELECT, INSERT, UPDATE, DELETE
+DCL (Data Control Language)	Controls access/permissions	GRANT, REVOKE
+TCL (Transaction Control Language)	Manages transactions	COMMIT, ROLLBACK, SAVEPOINT
+
+/////////////////////////////////////////////////////////////////////// First we need to create database:
+create database movies;
+
+/////////////////////////////////////////////////////////////////////// we need to say to mysql that am going to use this database , so 
+use movies;
+
+// To create Table
+create table table_name(); 
+//this will create a empty table 
+eg : create table movie(); 
+
+/////////////////////////////////////////////////////////////////////// data types declaration:
+🔢 Numeric Data Types: 
+
+| **Data Type**  | **Description**                           | **Example**                |
+| -------------- | ----------------------------------------- | -------------------------- |
+| `INT`          | Integer number (whole number)             | `INT(11)` → 100            |
+| `TINYINT`      | Very small integer (-128 to 127)          | `TINYINT(1)`               |
+| `SMALLINT`     | Small integer (-32,768 to 32,767)         | `SMALLINT`                 |
+| `MEDIUMINT`    | Medium integer (-8 million to +8 million) | `MEDIUMINT`                |
+| `BIGINT`       | Large integer (-2^63 to 2^63-1)           | `BIGINT`                   |
+| `DECIMAL(m,d)` | Exact decimal values (great for currency) | `DECIMAL(10,2)` → 12345.67 |
+| `FLOAT`        | Approximate floating-point number         | `FLOAT(7,4)`               |
+| `DOUBLE`       | Double-precision float                    | `DOUBLE(16,8)`             |
+
+📄 String Data Types:
+
+| **Data Type** | **Description**                              | **Example**                      |
+| ------------- | -------------------------------------------- | -------------------------------- |
+| `CHAR(n)`     | Fixed-length string (0–255 characters)       | `CHAR(10)`                       |
+| `VARCHAR(n)`  | Variable-length string (0–65,535 characters) | `VARCHAR(255)`                   |
+| `TEXT`        | Large text data (up to 65,535 bytes)         | `TEXT`                           |
+| `TINYTEXT`    | Up to 255 bytes                              | `TINYTEXT`                       |
+| `MEDIUMTEXT`  | Up to 16 MB                                  | `MEDIUMTEXT`                     |
+| `LONGTEXT`    | Up to 4 GB                                   | `LONGTEXT`                       |
+| `ENUM(...)`   | One value from predefined list               | `ENUM('small','medium','large')` |
+| `SET(...)`    | Zero or more values from a list              | `SET('a','b','c')`               |
+
+
+📅 Date & Time Data Types:
+
+| **Data Type** | **Description**                        | **Example**           |
+| ------------- | -------------------------------------- | --------------------- |
+| `DATE`        | Date only (`YYYY-MM-DD`)               | `2025-07-25`          |
+| `TIME`        | Time only (`HH:MM:SS`)                 | `14:30:00`            |
+| `DATETIME`    | Date and time                          | `2025-07-25 14:30:00` |
+| `TIMESTAMP`   | Date/time with automatic time zone UTC | `2025-07-25 14:30:00` |
+| `YEAR`        | Year (4-digit)                         | `2025`                |
+
+
+✅ Boolean Type:
+
+| **Data Type** | **Description**                              | **Example** |
+| ------------- | -------------------------------------------- | ----------- |
+| `BOOLEAN`     | Alias for `TINYINT(1)` (0 = false, 1 = true) | `1` or `0`  |
+
+////////////////////////////////////////////////////////////////////////////////////////////// Create column
+create table movie(
+id int primary key,
+movie_name varchar(100),
+yr int,
+budget int,
+collection int 
+);
+/////// this create a table with the column (index no, moviename, year, budget, collection)
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////// To Display the table
+describe movie;
+//This will show the empty table.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////  Insert values in the column
+insert into movie values
+(1,'Avatar', 2009, 237, 2847),
+(2,'Titanic', 1997, 200, 2200),
+(3,'The Dark Knight', 2008, 185, 1005),
+(4,'Avengers: Endgame', 2019, 356, 2797),
+(5,'Joker', 2019, 55, 1074),
+(6,'Interstellar', 2014, 165, 701),
+(7,'Black Panther', 2018, 200, 1347),
+(8,'Fast & Furious 7', 2015, 190, 1516),
+(9,'The Lion King', 2019, 260, 1663),
+(10,'The Pursuit of Happyness', 2006, 55, 307.1);
+
+/// The char should be in the quotes(' ').
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////  To display the table
+select * from table_name; 
+eg: select * from movie;
+// This will show the all datas in the table.
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////  Operators in SQL
+
+| **Operation**    | **Description**                                       | **Example**                                                           |
+| ---------------- | ----------------------------------------------------- | --------------------------------------------------------------------- |
+| `SELECT`         | Retrieves data from one or more tables                | `SELECT * FROM users;`                                                |
+| `WHERE`          | Filters records based on a condition                  | `SELECT * FROM users WHERE age > 18;`                                 |
+| `INSERT`         | Adds new data into a table                            | `INSERT INTO users (name, age) VALUES ('Alice', 25);`                 |
+| `UPDATE`         | Modifies existing records                             | `UPDATE users SET age = 30 WHERE name = 'Alice';`                     |
+| `DELETE`         | Removes one or more records from a table              | `DELETE FROM users WHERE age < 18;`                                   |
+| `CREATE TABLE`   | Creates a new table                                   | `CREATE TABLE users (id INT, name VARCHAR(50));`                      |
+| `DROP TABLE`     | Deletes a table and all its data                      | `DROP TABLE users;`                                                   |
+| `ALTER TABLE`    | Adds, deletes, or modifies columns                    | `ALTER TABLE users ADD email VARCHAR(100);`                           |
+| `TRUNCATE TABLE` | Deletes all data from a table (cannot be rolled back) | `TRUNCATE TABLE users;`                                               |
+| `ORDER BY`       | Sorts results by one or more columns                  | `SELECT * FROM users ORDER BY age DESC;`                              |
+| `GROUP BY`       | Groups rows for aggregate functions                   | `SELECT age, COUNT(*) FROM users GROUP BY age;`                       |
+| `HAVING`         | Filters groups based on aggregate conditions          | `SELECT age, COUNT(*) FROM users GROUP BY age HAVING COUNT(*) > 1;`   |
+| `JOIN`           | Combines rows from two or more tables                 | `SELECT * FROM users INNER JOIN orders ON users.id = orders.user_id;` |
+| `UNION`          | Combines result sets from two SELECTs                 | `SELECT name FROM customers UNION SELECT name FROM vendors;`          |
+| `LIKE`           | Pattern matching for text search                      | `SELECT * FROM users WHERE name LIKE 'A%';`                           |
+| `IN`             | Checks if a value exists in a list                    | `SELECT * FROM users WHERE age IN (25, 30, 35);`                      |
+| `BETWEEN`        | Checks if value is within a range                     | `SELECT * FROM users WHERE age BETWEEN 18 AND 30;`                    |
+| `IS NULL`        | Checks for NULL (missing) values                      | `SELECT * FROM users WHERE email IS NULL;`                            |
+| `DISTINCT`       | Removes duplicate results                             | `SELECT DISTINCT country FROM users;`                                 |
+| `LIMIT`          | Restricts number of results returned                  | `SELECT * FROM users LIMIT 5;`                                        |
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////  Problems using Select operation:
+// SQL :   This SQL Command is used for all operations based problems
+
+create database movies;
+use movies;
+create table movie(
+id int primary key,
+movie_name varchar(100),
+yr int,
+budget int,
+collection int 
+);
+describe movie;
+insert into movie values
+(1,'Avatar', 2009, 237, 2847),
+(2,'Titanic', 1997, 200, 2200),
+(3,'The Dark Knight', 2008, 185, 1005),
+(4,'Avengers: Endgame', 2019, 356, 2797),
+(5,'Joker', 2019, 55, 1074),
+(6,'Interstellar', 2014, 165, 701),
+(7,'Black Panther', 2018, 200, 1347),
+(8,'Fast & Furious 7', 2015, 190, 1516),
+(9,'The Lion King', 2019, 260, 1663),
+(10,'The Pursuit of Happyness', 2006, 55, 307.1);
+select * from movie; 
+
+🔹 1. List all movies released after 2010
+
+-- Get the names of all movies released after the year 2010
+SELECT movie_name 
+FROM movie 
+WHERE yr > 2010;
+
+🔹 2. Show details of movies that collected more than 2000 (in millions)
+
+-- Show all movie details where collection is greater than 2000
+SELECT * 
+FROM movie 
+WHERE collection > 2000;
+
+🔹 3. List movie names and years with a budget under 100
+
+-- Find movies with a budget less than 100 and show their name and year
+SELECT movie_name, yr 
+FROM movie 
+WHERE budget < 100;
+
+
+🔹 4. Find movies released in 2019 with their collection
+
+-- Show movies released in 2019 and how much they collected
+SELECT movie_name, collection 
+FROM movie 
+WHERE yr = 2019;
+
+🔹 5. Show movies where collection > budget (profitable movies)
+
+-- Get all profitable movies where collection is more than budget
+SELECT movie_name, budget, collection 
+FROM movie 
+WHERE collection > budget;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////  Problems using WHERE operation:
+
+🔸 1. Find all movies with a budget greater than 200
+
+-- Show movies where the budget is greater than 200
+SELECT * 
+FROM movie 
+WHERE budget > 200;
+
+🔸 2. Get the details of movies released before 2010
+
+-- Retrieve movies released before the year 2010
+SELECT * 
+FROM movie 
+WHERE yr < 2010;
+
+🔸 3. List movies that have exactly 55 as their budget
+
+-- Find movies where the budget is exactly 55
+SELECT * 
+FROM movie 
+WHERE budget = 55;
+
+🔸 4. Show movies where the collection is not equal to the budget
+
+-- Get movies where collection is different from budget
+SELECT * 
+FROM movie 
+WHERE collection != budget;
+
+🔸 5. Find movies with the word "The" in their title
+
+-- Get movies where the title contains the word "The"
+SELECT * 
+FROM movie 
+WHERE movie_name LIKE '%The%';
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////  Problems using Orderby operation:
+
+🔸 1. List all movies sorted by release year (oldest to newest)
+
+-- Show all movies ordered by year in ascending order
+SELECT * 
+FROM movie 
+ORDER BY yr ASC;
+
+🔸 2. Display movies sorted by collection in descending order
+
+-- Show all movies ordered by collection from highest to lowest
+SELECT * 
+FROM movie 
+ORDER BY collection DESC;
+
+🔸 3. Get movie names and budget, sorted by budget (lowest to highest)
+
+-- Show movie names and budget sorted by budget in ascending order
+SELECT movie_name, budget 
+FROM movie 
+ORDER BY budget ASC;
+
+🔸 4. List movies released in 2019, sorted by collection descending
+
+-- Show 2019 movies ordered by collection (highest first)
+SELECT movie_name, collection 
+FROM movie 
+WHERE yr = 2019 
+ORDER BY collection DESC;
+
+🔸 5. Show all movies sorted alphabetically by name
+
+-- Show all movies ordered alphabetically by movie name
+SELECT * 
+FROM movie 
+ORDER BY movie_name ASC;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////  Problems using LIMIT  operation:
+
+🔸 1. Show the first 5 movies in the table
+
+-- Get the first 5 records from the movie table
+SELECT * 
+FROM movie 
+LIMIT 5;
+
+🔸 2. Display the top 3 highest collecting movies
+
+-- Show top 3 movies based on collection (highest first)
+SELECT movie_name, collection 
+FROM movie 
+ORDER BY collection DESC 
+LIMIT 3;
+
+🔸 3. Get 2 movies with the lowest budget
+
+-- Fetch 2 movies that have the smallest budget
+SELECT movie_name, budget 
+FROM movie 
+ORDER BY budget ASC 
+LIMIT 2;
+
+🔸 4. Show any 1 movie released in 2019
+
+-- Select one movie from year 2019 (any)
+SELECT * 
+FROM movie 
+WHERE yr = 2019 
+LIMIT 1;
+
+🔸 5. List 4 movies in alphabetical order
+
+-- Show 4 movies sorted by name (A-Z)
+SELECT movie_name 
+FROM movie 
+ORDER BY movie_name ASC 
+LIMIT 4;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////  Problems using DISTINCT operation:
+
+🔸 1. List all unique release years
+
+-- Show all different years in which movies were released
+SELECT DISTINCT yr 
+FROM movie;
+
+🔸 2. Show unique budget values
+
+-- List all unique budget values used in the table
+SELECT DISTINCT budget 
+FROM movie;
+
+🔸 3. Get all distinct combinations of year and budget
+
+-- Show unique (year, budget) combinations
+SELECT DISTINCT yr, budget 
+FROM movie;
+
+🔸 4. Find how many unique collection values exist
+
+-- Count number of different collection values
+SELECT COUNT(DISTINCT collection) AS unique_collections 
+FROM movie;
+
+🔸 5. List all unique movie names that contain the word 'The'
+
+-- Get different movie titles that include the word 'The'
+SELECT DISTINCT movie_name 
+FROM movie 
+WHERE movie_name LIKE '%The%';
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////// THE END /////////////////////////////////////////////////////////////////////////////////////////////////
