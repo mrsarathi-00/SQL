@@ -1,1 +1,56 @@
+////////////////////////////////////////////////////////////////////////////////////////////////////////  Problems using GROUP BY operation:
+
+1. Count how many movies were released each year, ordered by year ascending.
+
+SELECT COUNT(movie_name) as movie_count ,yr
+FROM movie
+GROUP BY yr
+ORDER BY yr;
+
+2. Find the total budget of movies released in each year, ordered by total budget descending.
+
+select sum(budget) as total_budget, yr  
+from movie 
+group by yr
+order by total_budget desc; 
+
+3. Find the average collection of movies for each year, ordered by average collection descending.
+
+select avg(collection)  as avg_collection ,yr
+from movie 
+group by yr
+order by avg_collection desc;
+
+4. List each year and total collection, ordered by total collection ascending.
+
+select sum(collection) as total_collections , yr  
+from movie 
+group by yr
+order by total_collections desc; 
+
+5. Count how many movies with a budget greater than 150 million were released each year, ordered by year descending.
+
+select count(movie_name),yr 
+from movie 
+where budget>150 
+group by yr 
+order by yr desc;
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////  Problems using GROUP BY operation:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
