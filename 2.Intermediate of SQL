@@ -38,11 +38,150 @@ order by yr desc;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////  Problems using Constraints operation:
 
+--  for having constrains we need to create even column in the table. so create column like 
+* director	
+* genre	
+* rating	
+* release_date	
+* certificate		
+* runtime	
+* language
+* country	
+* studio
 
+-- Alter table @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+ALTER TABLE movie 
+ADD director VARCHAR(100) NOT NULL,
+ADD genre VARCHAR(50) CHECK (genre IN ('Action', 'Drama', 'Sci-Fi', 'Comedy', 'Horror', 'Romance')),
+ADD rating DECIMAL(3,1) CHECK (rating BETWEEN 0 AND 10),
+ADD release_date DATE,
+ADD certificate VARCHAR(10) CHECK (certificate IN ('U', 'UA', 'A', 'R', 'PG-13')),
+ADD runtime INT CHECK (runtime BETWEEN 40 AND 300),
+ADD language VARCHAR(50) DEFAULT 'English',
+ADD country VARCHAR(100) DEFAULT 'USA',
+ADD studio VARCHAR(100);
 
+-- update table values @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
+UPDATE movie SET 
+  director = 'James Cameron',
+  genre = 'Sci-Fi',
+  rating = 7.9,
+  release_date = '2009-12-18',
+  certificate = 'UA',
+  runtime = 162,
+  language = 'English',
+  country = 'USA',
+  studio = '20th Century Fox'
+WHERE id = 1;
 
+UPDATE movie SET 
+  director = 'James Cameron',
+  genre = 'Romance',
+  rating = 7.8,
+  release_date = '1997-12-19',
+  certificate = 'UA',
+  runtime = 195,
+  language = 'English',
+  country = 'USA',
+  studio = '20th Century Fox'
+WHERE id = 2;
 
+UPDATE movie SET 
+  director = 'Christopher Nolan',
+  genre = 'Action',
+  rating = 9.0,
+  release_date = '2008-07-18',
+  certificate = 'UA',
+  runtime = 152,
+  language = 'English',
+  country = 'USA',
+  studio = 'Warner Bros.'
+WHERE id = 3;
+
+UPDATE movie SET 
+  director = 'Anthony & Joe Russo',
+  genre = 'Action',
+  rating = 8.4,
+  release_date = '2019-04-26',
+  certificate = 'UA',
+  runtime = 181,
+  language = 'English',
+  country = 'USA',
+  studio = 'Marvel Studios'
+WHERE id = 4;
+
+UPDATE movie SET 
+  director = 'Todd Phillips',
+  genre = 'Drama',
+  rating = 8.4,
+  release_date = '2019-10-04',
+  certificate = 'A',
+  runtime = 122,
+  language = 'English',
+  country = 'USA',
+  studio = 'Warner Bros.'
+WHERE id = 5;
+
+UPDATE movie SET 
+  director = 'Christopher Nolan',
+  genre = 'Sci-Fi',
+  rating = 8.6,
+  release_date = '2014-11-07',
+  certificate = 'UA',
+  runtime = 169,
+  language = 'English',
+  country = 'USA',
+  studio = 'Paramount Pictures'
+WHERE id = 6;
+
+UPDATE movie SET 
+  director = 'Ryan Coogler',
+  genre = 'Action',
+  rating = 7.3,
+  release_date = '2018-02-16',
+  certificate = 'UA',
+  runtime = 134,
+  language = 'English',
+  country = 'USA',
+  studio = 'Marvel Studios'
+WHERE id = 7;
+
+UPDATE movie SET 
+  director = 'James Wan',
+  genre = 'Action',
+  rating = 7.1,
+  release_date = '2015-04-03',
+  certificate = 'UA',
+  runtime = 137,
+  language = 'English',
+  country = 'USA',
+  studio = 'Universal Pictures'
+WHERE id = 8;
+
+UPDATE movie SET 
+  director = 'Jon Favreau',
+  genre = 'Drama',
+  rating = 6.8,
+  release_date = '2019-07-19',
+  certificate = 'U',
+  runtime = 118,
+  language = 'English',
+  country = 'USA',
+  studio = 'Walt Disney'
+WHERE id = 9;
+
+UPDATE movie SET 
+  director = 'Gabriele Muccino',
+  genre = 'Drama',
+  rating = 8.0,
+  release_date = '2006-12-15',
+  certificate = 'UA',
+  runtime = 117,
+  language = 'English',
+  country = 'USA',
+  studio = 'Columbia Pictures'
+WHERE id = 10;
 
 
 
