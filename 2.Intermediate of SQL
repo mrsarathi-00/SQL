@@ -36,6 +36,21 @@ where budget>150
 group by yr 
 order by yr desc;
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////  What is CONSTRAIN ?:
+
+* In SQL, constraints are rules enforced on data in a table to maintain data integrity, accuracy, and consistency. 
+* These rules restrict the type of data that can be inserted into a column or a set of columns.
+
+Common Types of SQL Constraints:
+
+$ NOT NULL	      : Ensures that a column cannot have a NULL value.
+$ UNIQUE	        : Ensures all values in a column (or a group of columns) are unique.
+$ PRIMARY         : KEY	Uniquely identifies each record in a table; it is a combination of NOT NULL and UNIQUE.
+$ FOREIGN         : KEY	Ensures referential integrity by linking a column (or columns) in one table to the primary key in another table.
+$ CHECK	          : Ensures that all values in a column satisfy a specific condition.
+$ DEFAULT	        : Provides a default value for a column when no value is specified.
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////  Problems using Constraints operation:
 
 --  for having constrains we need to create even column in the table. so create column like 
