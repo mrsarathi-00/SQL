@@ -286,3 +286,69 @@ UPDATE movie SET
 WHERE id = 10;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////  Problems using Function:
+
+Q1.
+Write a query to show the movie name, director, and rating of all movies that were released after the year 2010.
+
+SELECT movie_name, rating, director 
+FROM movie 
+WHERE yr > 2010;
+
+Q2.
+Write a query to find the highest-grossing movie (i.e., the one with the maximum collection).
+Show: movie_name, collection, and studio.
+
+SELECT movie_name, collection, studio
+FROM movie
+WHERE collection = (SELECT MAX(collection) FROM movie);
+
+Q3.
+Write a query to find all movies where the collection is more than double the budget.
+Show: movie_name, budget, collection, rating, studio
+
+SELECT movie_name, budget, rating, studio, collection 
+FROM movie 
+WHERE collection > (budget * 2);
+
+Q4.
+Write a query to show the top 3 highest-rated movies.
+Show: movie_name, rating, and director
+
+SELECT movie_name, rating, director 
+FROM movie 
+ORDER BY rating DESC 
+LIMIT 3;
+
+Q5.
+Write a query to find the average rating of movies for each genre — but only include genres where the average rating is more than 7.5.
+
+SELECT genre, ROUND(AVG(rating), 2) AS ave_rating 
+FROM movie 
+GROUP BY genre 
+HAVING AVG(rating) > 7.5
+ORDER BY ave_rating DESC;
+
+select movie_name,yr,genre,rating,studio from movie 
+where genre in ('Action','Drama') and yr>2010 and rating >=8 
+and studio !='Marvel Studios' order by rating desc;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
