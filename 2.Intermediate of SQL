@@ -285,7 +285,7 @@ UPDATE movie SET
   studio = 'Columbia Pictures'
 WHERE id = 10;
 
-////////////////////////////////////////////////////////////////////////////////////////////////////////  Problems using Function:
+////////////////////////////////////////////////////////////////////////////////////////////////////////  Problems using Operations:
 
 Q1.
 Write a query to show the movie name, director, and rating of all movies that were released after the year 2010.
@@ -328,27 +328,12 @@ GROUP BY genre
 HAVING AVG(rating) > 7.5
 ORDER BY ave_rating DESC;
 
+Q6:
+Write a SQL query to display all movies that The genre is either 'Action' or 'Drama'.The movie was released after 2010.The rating is at least 8.
+Sort the result by rating in descending order.The studio is not 'Marvel Studios'
+Show: movie_name yr genre rating studio
+
 select movie_name,yr,genre,rating,studio from movie 
 where genre in ('Action','Drama') and yr>2010 and rating >=8 
 and studio !='Marvel Studios' order by rating desc;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
