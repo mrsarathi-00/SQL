@@ -50,6 +50,93 @@ $ FOREIGN         : KEY	Ensures referential integrity by linking a column (or co
 $ CHECK	          : Ensures that all values in a column satisfy a specific condition.
 $ DEFAULT	        : Provides a default value for a column when no value is specified.
 
+ 1. NOT NULL
+👉 This means: "Don't leave this field empty."
+
+CREATE TABLE Students (
+    Name VARCHAR(100) NOT NULL
+);
+
+📌 What it does: You must enter a name. If you try to insert a student without a name, it will give an error.
+
+-- ❌ This will give an error because Name is NOT NULL
+INSERT INTO Students (Name) VALUES (NULL);
+
+
+ 2. UNIQUE
+👉 This means: "Every value must be different (no duplicates)."
+
+CREATE TABLE Students (
+    Email VARCHAR(100) UNIQUE
+);
+
+📌 What it does: No two students can have the same email.
+
+INSERT INTO Students (Email) VALUES ('a@gmail.com');  -- ✅ OK
+INSERT INTO Students (Email) VALUES ('b@gmail.com');  -- ✅ OK
+INSERT INTO Students (Email) VALUES ('a@gmail.com');  -- ❌ ERROR: duplicate email
+
+3. PRIMARY KEY
+👉 This means: "This column is used to identify each row uniquely."
+Also, it is NOT NULL + UNIQUE together.
+
+CREATE TABLE Students (
+    RollNo INT PRIMARY KEY,
+    Name VARCHAR(100)
+);
+
+📌 What it does: Each student must have a unique RollNo, and it can't be empty.
+
+INSERT INTO Students (RollNo, Name) VALUES (1, 'Ramesh'); -- ✅ OK
+INSERT INTO Students (RollNo, Name) VALUES (1, 'Sita');   -- ❌ ERROR: duplicate RollNo
+
+ 4. FOREIGN KEY
+👉 This means: "This value must exist in another table."
+It links two tables.
+
+CREATE TABLE Classes (
+    ClassID INT PRIMARY KEY
+);
+
+CREATE TABLE Students (
+    RollNo INT PRIMARY KEY,
+    ClassID INT,
+    FOREIGN KEY (ClassID) REFERENCES Classes(ClassID)
+);
+
+📌 What it does: You can't insert a student with a class that doesn't exist.
+
+INSERT INTO Classes VALUES (1); -- ✅ OK
+INSERT INTO Students VALUES (101, 1); -- ✅ OK (class exists)
+
+INSERT INTO Students VALUES (102, 2); -- ❌ ERROR: ClassID 2 doesn't exist
+
+5. CHECK
+👉 This means: "Only allow values that meet this condition."
+
+CREATE TABLE Students (
+    Name VARCHAR(100),
+    Age INT CHECK (Age >= 10)
+);
+
+📌 What it does: You can only insert students with age 10 or more.
+
+INSERT INTO Students VALUES ('Anil', 14); -- ✅ OK
+INSERT INTO Students VALUES ('Sunita', 9); -- ❌ ERROR: age must be >= 10
+
+📦 6. DEFAULT
+👉 This means: "If nothing is given, use this value."
+
+CREATE TABLE Students (
+    Name VARCHAR(100),
+    Class VARCHAR(10) DEFAULT '8A'
+);
+
+📌 What it does: If you don’t enter class, it will automatically use '8A'.
+
+INSERT INTO Students (Name) VALUES ('Kiran');  
+-- ✅ Class will be set to '8A' automatically
+
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////  Problems using Constraints operation:
 
